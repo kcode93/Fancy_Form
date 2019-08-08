@@ -11,3 +11,17 @@ body{
   background-color: $primary-color;
 }
 
+h1.logo{
+    color: $white-color;
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+}
+
+.container{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+}
+
