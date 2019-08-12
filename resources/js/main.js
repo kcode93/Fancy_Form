@@ -112,6 +112,9 @@ function inputPass(){
     setTimeout(transform, shakeTime * 0, 0, 10);
     setTimeout(transform, shakeTime * 1, 0, 10);
 
+    //store Answer in array
+    questions[position].answer = inputField.value;
+
     //increment position 
     position++;
 
