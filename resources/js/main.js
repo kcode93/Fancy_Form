@@ -97,6 +97,23 @@ function inputFail(){
 
 //Field input passed
 function inputPass(){
+    formBox.className = '';
+    setTimeout(transform, shakeTime * 0, 0, 10);
+    setTimeout(transform, shakeTime * 1, 0, 10);
 
+    //increment position 
+    position++;
+
+    if(questions[position]){
+        //show question
+        hideQuestion();
+        getQuestion();
+    }else{
+        //remove questions
+        hideQuestion();
+        formBox.className = 'close';
+        progressBar.style.width = '100%';
+        formComplete();
+    }
 }
 
