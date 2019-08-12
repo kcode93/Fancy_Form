@@ -23,10 +23,16 @@ const inputLabel = document.querySelector('#input-label');
 const inputProgress = document.querySelector('#input-progress');
 const progressBar = document.querySelector('#progress-bar');
 
-//events
+/************** EVENTS **************/
+
+//Get Questions on DOM Load
 document.addEventListener('DOMContentLoaded', getQuestion);
 
-//functions
+//Next Button Click
+nextBtn.addEventListener('click', validate);
+
+
+/******************** FUNCTIONS *****************/
 
 //gets question from array and add it to Markup
 function getQuestion(){
@@ -47,8 +53,50 @@ function getQuestion(){
     showQuestion();
 }
 
+//displays Question to user
 function showQuestion(){
     inputGroup.style.opacity = 1;
     inputProgress.style.transition = '';
     inputProgress.style.width = '100%';
 }
+
+//hides question from user
+function hideQuestion(){
+    inputGroup.style.opacity = 0;
+    inputLabel.style.marginLeft = 0;
+    inputProgress.style.width = 0;
+    inputProgress.style.transition = 'none';
+    inputGroup.style.border = null;
+}
+
+//transform to create shake motion
+function transform(x, y){
+    formBox.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+//validates fields
+function validate(){
+    if(!inputField.value.match(questions[position].pattern || /.+/)){
+        inputFail();
+    }else{
+        inputPass();
+    }
+}
+
+//Field input fail
+function inputFail(){
+    formBox.className = 'error';
+    //repeat shake motion
+    for(let i = 0; i < 6; i++){
+        setTimeout(transform, shakeTime * i, ((i % 2) *2 - 1) * 20, 0);
+        setTimeout(transform, shakeTime *6, 0 , 0);
+        inputField.focus();
+    }
+
+}
+
+//Field input passed
+function inputPass(){
+
+}
+
