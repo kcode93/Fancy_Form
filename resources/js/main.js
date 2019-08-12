@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', getQuestion);
 //Next Button Click
 nextBtn.addEventListener('click', validate);
 
+//inputField enter event
+inputField.addEventListener('keyup', submitOnEnter);
+
 
 /******************** FUNCTIONS *****************/
 
@@ -74,6 +77,13 @@ function transform(x, y){
     formBox.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+//submits question on enter press
+function submitOnEnter(e){
+    if(e.keyCode == 13){
+        validate();
+    }
+}
+
 //validates fields
 function validate(){
     if(!inputField.value.match(questions[position].pattern || /.+/)){
@@ -82,6 +92,7 @@ function validate(){
         inputPass();
     }
 }
+
 
 //Field input fail
 function inputFail(){
@@ -115,5 +126,17 @@ function inputPass(){
         progressBar.style.width = '100%';
         formComplete();
     }
+}
+
+//all fields completed
+function formComplete(){
+    const h1 = document.createElement('h1');
+    h1.classList.add('end');
+    h1.appendChild(document.createTextNode('Thanks ${questions[0].answer} You are registered and will get an email shortly'));
+    setTimeout(() => {
+        formBox.parentElement.appendChild(h1);
+        setTimeout(() => h1.style.opacity = 1, 50);
+    }, 1000);
+    
 }
 
